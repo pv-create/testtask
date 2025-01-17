@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  todoapi:
+    image: todoapi
+    build:
+      context: .
+      dockerfile: Todo.Api/Dockerfile
+      args:
+        - configuration=Debug
+    ports:
+      - 5044:80
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=db;Database=MyDatabase;Username=postgres;Password=postgres
+      - ASPNETCORE_URLS=http://+:80
+    networks:
+      - mynetwork
+
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=MyDatabase
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - mynetwork
+
+  samba:
+    image: dperson/samba
+    environment:
+      - TZ=UTC
+    ports:
+      - "139:139"
+      - "445:445"
+    volumes:
+      - sambadata:/share
+    command: '-s "share;/share;yes;no;yes;all;none"'
+    networks:
+      - mynetwork
+
+volumes:
+  postgres_data:
+  sambadata:
+
+networks:
+  mynetwork:
+    driver: bridge
