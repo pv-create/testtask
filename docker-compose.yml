@@ -15,7 +15,7 @@ services:
         condition: service_healthy
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Host=localhost;Database=MyDatabase;Username=postgres;Password=postgres
+      - ConnectionStrings__DefaultConnection=Host=db;Database=MyDatabase;Username=postgres;Password=postgres
       - ASPNETCORE_URLS=http://+:80
     networks:
       - mynetwork
@@ -43,9 +43,16 @@ services:
         context: .
         dockerfile: Todo.MigrationRunner/Dockerfile
       environment:
-        ConnectionStrings__DefaultConnection: Host=localhost;Database=MyDatabase;Username=postgres;Password=postgres
+        ConnectionStrings__DefaultConnection: Host=db;Database=MyDatabase;Username=postgres;Password=postgres
+      command: >
+        /bin/bash -c "
+          sleep 10 &&
+          dotnet Todo.MigrationRunner.dll"
       depends_on:
-        - db
+        db:
+          condition: service_healthy
+      networks:
+      - mynetwork
 
   samba:
     image: dperson/samba
