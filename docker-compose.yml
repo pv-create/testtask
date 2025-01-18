@@ -15,7 +15,7 @@ services:
         condition: service_healthy
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Host=db;Database=MyDatabase;Username=postgres;Password=postgres
+      - ConnectionStrings__DefaultConnection=Host=localhost;Database=MyDatabase;Username=postgres;Password=postgres
       - ASPNETCORE_URLS=http://+:80
     networks:
       - mynetwork
@@ -37,6 +37,15 @@ services:
       retries: 5
     networks:
       - mynetwork
+
+  migration-runner:
+      build:
+        context: .
+        dockerfile: Todo.MigrationRunner/Dockerfile
+      environment:
+        ConnectionStrings__DefaultConnection: Host=localhost;Database=MyDatabase;Username=postgres;Password=postgres
+      depends_on:
+        - db
 
   samba:
     image: dperson/samba

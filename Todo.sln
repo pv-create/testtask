@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Core", "Todo.Core\Todo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Infrustructure", "Todo.Infrustructure\Todo.Infrustructure.csproj", "{4F78461C-A168-4E32-9AB3-0A911497644F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.MigrationRunner", "Todo.MigrationRunner\Todo.MigrationRunner.csproj", "{100E16FC-68EC-45B0-B27A-77543B9FC006}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{4F78461C-A168-4E32-9AB3-0A911497644F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F78461C-A168-4E32-9AB3-0A911497644F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F78461C-A168-4E32-9AB3-0A911497644F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{100E16FC-68EC-45B0-B27A-77543B9FC006}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{100E16FC-68EC-45B0-B27A-77543B9FC006}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{100E16FC-68EC-45B0-B27A-77543B9FC006}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{100E16FC-68EC-45B0-B27A-77543B9FC006}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
