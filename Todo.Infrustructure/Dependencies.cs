@@ -3,7 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Todo.Core.Contracts;
+using Todo.Core.Options;
 using Todo.Infrustructure.Repositories;
+using Todo.Infrustructure.StorageServices;
 
 namespace Todo.Infrustructure
 {
@@ -18,10 +20,14 @@ namespace Todo.Infrustructure
                 throw new InvalidOperationException("Строка подключения 'DefaultConnection' не найдена.");
             }
 
+            builder.Services.Configure<SambaOptions>(
+                builder.Configuration.GetSection(SambaOptions.SectionName));
+
             builder.Services.AddDbContext<TodoDbContext>(options =>
                 options.UseNpgsql(connectionString));
 
             builder.Services.AddScoped<ItodoRepository, TodoRepository>();
+            builder.Services.AddScoped<ISambaService, SambaService>();
         }
     }
 }

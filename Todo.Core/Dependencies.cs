@@ -14,6 +14,7 @@ namespace Todo.Core
         public static void AddServices(this WebApplicationBuilder builder)
         {
             builder.Services.AddScoped<ITodoService, TodoService>();
+            builder.Services.AddScoped<IFileService, FileService>();
         }
     }
 }

@@ -58,15 +58,19 @@ services:
     image: dperson/samba
     environment:
       - TZ=UTC
+      - USERID=1000
+      - GROUPID=1000
     ports:
       - "139:139"
       - "445:445"
     volumes:
       - sambadata:/share
-    command: '-s "share;/share;yes;no;yes;all;none"'
+    command: >
+      -s "share;/share;yes;no;no;all;all;all"
+      -u "sambauser;sambapass"
+      -p
     networks:
       - mynetwork
-
 volumes:
   postgres_data:
   sambadata:
