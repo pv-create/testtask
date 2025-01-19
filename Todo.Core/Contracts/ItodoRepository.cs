@@ -9,5 +9,7 @@ namespace Todo.Core.Contracts
     public interface ItodoRepository
     {
         Task<TodoItem> CreateTodoAsync(TodoItem todoItem);
+
+        Task<IReadOnlyCollection<TodoItem>> GetTodoItemsAsync();
     }
 }

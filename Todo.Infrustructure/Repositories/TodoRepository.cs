@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Todo.Core.Contracts;
 using Todo.Core.Models;
 
@@ -21,6 +18,13 @@ namespace Todo.Infrustructure.Repositories
             _context.SaveChanges();
 
             return todoItem;
+        }
+
+        public async Task<IReadOnlyCollection<TodoItem>> GetTodoItemsAsync()
+        {
+            var result = await _context.TodoItems.ToListAsync();
+
+            return result;
         }
     }
 }

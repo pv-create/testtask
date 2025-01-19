@@ -25,5 +25,11 @@ namespace Todo.Api.Controllers
             await _todoService.CreateTodoItemAsync(request);
             return Ok();
         }
+
+        [HttpGet]
+        public async Task<ActionResult<IReadOnlyCollection<TodoItem>>> GetTodos()
+        {
+            return Ok(await _todoService.GetTodoItems());
+        }
     }
 }

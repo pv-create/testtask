@@ -25,16 +25,11 @@ namespace Todo.Core.Services
             return result;
         }
 
-        public List<TodoItem> GetTodoItems()
+        public async Task<IReadOnlyCollection<TodoItem>> GetTodoItems()
         {
-            var todoItems = new List<TodoItem>()
-            {
-                new TodoItem(),
-                new TodoItem(),
-                new TodoItem()
-            };
+            var result = await _repository.GetTodoItemsAsync();
 
-            return todoItems;
+            return result;
         }
     }
 }

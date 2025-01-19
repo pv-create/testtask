@@ -5,7 +5,7 @@ namespace Todo.Core.Interfaces
 {
     public interface ITodoService
     {
-        List<TodoItem> GetTodoItems();
+        Task<IReadOnlyCollection<TodoItem>> GetTodoItems();
 
         Task<TodoItem> CreateTodoItemAsync(TodoDto item);
     }
