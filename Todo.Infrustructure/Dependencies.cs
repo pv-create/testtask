@@ -28,6 +28,7 @@ namespace Todo.Infrustructure
 
             builder.Services.AddScoped<ItodoRepository, TodoRepository>();
             builder.Services.AddScoped<ISambaService, SambaService>();
+            builder.Services.AddScoped<IFileRepository, FileRepository>(); 
         }
     }
 }

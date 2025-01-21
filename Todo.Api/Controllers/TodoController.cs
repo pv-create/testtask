@@ -9,7 +9,7 @@ namespace Todo.Api.Controllers
     [Route("api/[controller]")]
     public class TodoController : ControllerBase
     {
-        private readonly ITodoService _todoService;
+        private readonly ITodoService _todoService; 
         private readonly ILogger<TodoController> _logger;
         public TodoController(ITodoService todoService, ILogger<TodoController> logger)
         {
@@ -29,7 +29,8 @@ namespace Todo.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IReadOnlyCollection<TodoItem>>> GetTodos()
         {
-            return Ok(await _todoService.GetTodoItems());
+            var todoItems = await _todoService.GetTodoItems();
+            return Ok(todoItems);
         }
     }
 }

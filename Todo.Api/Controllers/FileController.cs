@@ -22,6 +22,11 @@ namespace Todo.Api.Controllers
         {
             try
             {
+                string test;
+
+                string? test1 = null;
+
+                test1.Contains("");
                 string filePath = Path.Combine("", file.FileName);
                 using var stream = file.OpenReadStream();
                 await _fileService.UploadFile(filePath, stream, todoId);
